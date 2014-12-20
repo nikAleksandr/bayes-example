@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" media="all">
+    		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="http://d3js.org/queue.v1.min.js"></script>
+		<script src="http://d3js.org/topojson.v1.min.js"></script>
+	    
+	    <style type="text/css">
+			
+		</style>	
+	</head>
+	<body>
+		<div id="header">
+		</div>
+		
+		<div id="container">
+			<form id ="inputForm">
+				Probability of having Ebola: <input type="text" name="pebola">
+				<br/>
+				Probability of testing positive with a fever: <input type="text" name="pfever">
+				<br/>
+				Probability that a patient tests positive for a fever, if they have Ebola: <input type="text" name"pfeverGebola">
+				<br/>
+				Probability that a patient tests negative for a fever, but does have Ebola: <input type="text" name="pNfeverGEbola">
+				<br/>
+				Probability that a patient tests positive with a fever, but does not have Ebola: <input type="text" name="pfeverNebola">
+			</form>
+		</div>		
+		
+	</body>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    
+    <script>
+	    	var integer = d3.format(".0f");
+	    
+	   // 	var width = 960,
+		//	  height = 600;
+		var pebola,
+			   pfever,
+			   pfeverGebola,
+			   pNfeverGebola,
+			   pfeverNebola;
+			   
+		var values = {};
+		var form = d3.select("inputForm").selectAll("input").on("change", function(){formValues();});
+		
+		$('#inputForm :input').change(function() { console.log("changed"); formValues(); });
+		
+		function formValues() {
+			   pebola = $( "input[name='pebola']" ).val();
+			   pfever = $( "input[name='pfever']" ).val();
+			   pfeverGebola =$( "input[name='pfeverGebola']" ).val();
+			   pNfeverGebola = $( "input[name='pNfeverGebola']" ).val();
+			   pfeverNebola = $( "input[name='pfeverNebola']" ).val();
+			   
+			  pebola = parseInt(pebola),
+			   pfever = parseInt(pfever),
+			   pfeverGebola = parseInt(pfeverGebola),
+			   pNfeverGebola = parseInt(pNfeverGebola),
+			   pfeverNebola = parseInt(pfeverNebola);
+			   
+			   updateCalc();
+		}
+		
+		function updateCalc(){
+			var testEffectiveness = (pfeverGebola * pebola) 
+			/// (pfeverGebola * pebola + pfeverNebola * (1-pebola));
+			console.log(testEffectiveness);
+		}
+		
+		//d3.select(self.frameElement).style("height", height + "px");
+    </script>
+</html>
